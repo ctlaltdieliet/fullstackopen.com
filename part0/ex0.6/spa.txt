@@ -1,0 +1,7 @@
+browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+server-->browser: HTML-code
+
+Note:
+Browser sends data to server.
+SPA redraws the data.
+SPA sends to new_note_spa to save the data, new_note_responds  back that the messages was created  
