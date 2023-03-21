@@ -1,0 +1,10 @@
+POST http://localhost:3003/api/blogs HTTP/1.1
+content-type: application/json
+
+{
+    "title": "Title 2",
+    "author": "Benedikte 2",
+    "url": "https://sharepoint.com",
+    "likes": 3,
+    "userId":"640e281eec1917ef891a87f3"
+}
