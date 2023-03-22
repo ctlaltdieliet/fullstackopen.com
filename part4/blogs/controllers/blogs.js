@@ -27,7 +27,7 @@ blogRouter.get('/:id', async (request, response, next) => {
     catch{(error => next(error))}
 })
 
-blogRouter.post('/', async (request, response, next) => {
+blogRouter.post('/', middleware.tokenExtractor, middleware.userExtractor, async (request, response, next) => {
   const body = request.body
   const user = request.user
   const blog = new Blog({
@@ -65,13 +65,12 @@ else {
   })
 
 
-blogRouter.delete('/:id', async (request, response, next) => {
+blogRouter.delete('/:id', middleware.tokenExtractor, middleware.userExtractor, async (request, response, next) => {
+
   const user = request.user
+//console.log("DELETE USERID is ,",user)
   const BlogId=request.params.id
   const BlogArticle = await Blog.findById(request.params.id)
-  if (!request.decodedToken.id){
-    response.status(403).end()
-  }
   
   console.log("BlogArticle",request.params.id)
   if (user._id.toString()===BlogArticle.userId.toString()){
@@ -89,25 +88,33 @@ else {
 }
 })
 
-blogRouter.put('/:id', async (request, response, next) => {
+blogRouter.put('/:id', middleware.tokenExtractor, middleware.userExtractor, async (request, response, next) => {
   const body = request.body
-  if (!request.decodedToken.id){
+  console.log("requestparamsid is", request.params.id)
+ // console.log("update decodedToken".request.decodedToken.id)
+  if (!request.user.id){
     response.status(403).end()
   }
   
   const blog = new Blog({
+    id: request.params.id,
     title: body.title,
     author: body.author,
     url: body.url,
     likes: body.likes
   })
 
-
-  await Blog.findByIdAndUpdate(request.params.id, blog, { new: true })
-    try {(updatedBlog => {
-      response.json(updatedBlog)
-    })}
-    catch{(error => next(error))}
+console.log("bout to update",blog)
+const updatedBlog = await Blog.updateOne({id:request.params.id}, {$set:  {title: body.title,
+    author: body.author,
+    url: body.url,
+    likes: body.likes}})
+    if (updatedBlog) {
+      console.log("updated")
+      response.status(200).json(updatedBlog)
+    }
+    else {(error => {console.log("nt updated")
+    next(error)})}
 })
 
 module.exports = blogRouter

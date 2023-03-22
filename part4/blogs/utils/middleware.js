@@ -57,17 +57,9 @@ const tokenExtractor = async (request,response,next)=>{
 }
 
 const userExtractor = async (request,response,next)=>{
- const user = await User.findById(decodedToken.id)
-  if (!user.id) {
-   return response.status(403).json({ error: 'user has no rights to do this' })
-   }
-   else {
- //    console.log("user is ",user)
+ const user = await User.findById(request.decodedToken.id)
      request.user=user;
      next()
-  } 
-
-next()
 }
 
 

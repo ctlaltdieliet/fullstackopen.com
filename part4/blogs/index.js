@@ -21,8 +21,8 @@ app.listen(3003)
 app.use('/api/login', loginRouter)
 app.use('/api/users', usersRouter)
 
-//app.use(middleware.tokenExtractor)
-app.use('/api/blogs', middleware.userExtractor, blogRouter)
+
+app.use('/api/blogs', blogRouter)
 
 app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)
