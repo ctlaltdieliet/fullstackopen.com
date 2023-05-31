@@ -1,8 +1,8 @@
-const Notification = ({ message,className}) => {
+const Notification = ({ message,className }) => {
   if (message === null) {
     return null
   }
-console.log(className)
+  console.log(className)
   return (
     <div className={className}>
       {message}
