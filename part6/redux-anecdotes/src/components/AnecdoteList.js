@@ -17,13 +17,9 @@ const anecdotes= useSelector(state=> {
 })
   
   const voteUp3 = (id) => {
-    console.log("you voted")
+    console.log("you voted",id)
     dispatch(voteUp(id))
-    console.log("you voted2")
-    dispatch(setNotification(`You gave a vote for "${anecdotes.find(n => n.id === id).content}"`))
-    setTimeout(() => {
-      dispatch(removeNotification())
-    }, 5000)
+    dispatch(setNotification(`you voted "${anecdotes.find(n => n.id === id).content}"`, 10))
     
   }
   
