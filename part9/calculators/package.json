@@ -1,0 +1,30 @@
+{
+  "name": "fs-open-exercises",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.ts",
+  "scripts": {
+    "ts-node": "ts-node",
+    "calculateBmi": "ts-node bmiCalculator.ts",
+    "calculateExercises": "ts-node exerciseCalculator.ts",
+    "dev": "ts-node-dev hello.ts",
+    "start": "ts-node hello.ts",
+    "lint": "eslint .",
+    "lint-fix": "eslint . --fix"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^4.17.17",
+    "@types/node": "^20.5.0",
+    "@typescript-eslint/eslint-plugin": "^6.7.0",
+    "@typescript-eslint/parser": "^6.7.0",
+    "eslint": "^8.49.0",
+    "ts-node": "^10.5.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^4.5.5"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
