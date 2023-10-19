@@ -7,10 +7,10 @@ const getPatients = () :Patient[] => {
   return patientsData;
 };
 
-const getPatientById = (id: String) :Patient[] => { 
-  const patient=patientsData.filter(patient => patient.id===id);
-  return patient
+const getPatientById = (id: string): Patient | undefined => {
+	return patientsData.find((patient) => patient.id === id);
 };
+
 
 const getPatientsToDisplay = (): PatientDataToDisplay[] => {
   return patientsData.map(({ id, name, occupation, dateOfBirth, gender }) => 
