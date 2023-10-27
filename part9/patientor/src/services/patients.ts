@@ -13,10 +13,11 @@ const getAll = async () => {
 
 
 const getThisPatient = async (patientId: string) => {
+  
   const { data } = await axios.get<Patient>(
     `${apiBaseUrl}/patients/${patientId}`
   );
-
+  console.log(data)
   return data;
 };
 

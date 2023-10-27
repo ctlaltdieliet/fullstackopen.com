@@ -1,7 +1,7 @@
 import express from "express"
 import cors from "cors"
 
-//import diagnosesService from "../services/diagnosesService";
+import diagnosesService from "../services/diagnosesService";
 import patientsService from "../services/patientsService";
 import { NewPatientEntry } from '../types';
 
@@ -15,7 +15,7 @@ router.get("/ping", (_req, res) => {
 
 
 router.get("/diagnoses", (_req, res) => {
-  res.json({})
+  res.json(diagnosesService.getEntries())
 });
 
 router.get("/patients", (_req, res) => {
@@ -30,7 +30,7 @@ router.get("/patients/:id", (req, res) => {
 
 
 router.post('/patients', (req, res) => {
-  const newEntry: NewPatientEntry = { name:req.body.name, dateOfBirth:req.body.dateOfBirth, ssn:req.body.ssn, gender:req.body.gender, occupation:req.body.occupation, entries: [] }
+  const newEntry: NewPatientEntry = { name:req.body.name, dateOfBirth:req.body.dateOfBirth, ssn:req.body.ssn, gender:req.body.gender, occupation:req.body.occupation, entries: req.body.entries }
   
   const addedEntry: NewPatientEntry = patientsService.addPatient(
     newEntry

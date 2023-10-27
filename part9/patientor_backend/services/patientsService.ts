@@ -13,8 +13,8 @@ const getPatientById = (id: string): Patient | undefined => {
 
 
 const getPatientsToDisplay = (): PatientDataToDisplay[] => {
-  return patientsData.map(({ id, name, occupation, dateOfBirth, gender }) => 
-  ({id, name, occupation, dateOfBirth, gender  }));
+  return patientsData.map(({ id, name, occupation, dateOfBirth, gender, entries }) => 
+  ({id, name, occupation, dateOfBirth, gender, entries  }));
 };
 
 

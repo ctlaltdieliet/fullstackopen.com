@@ -1,4 +1,4 @@
-import { NewPatientEntry,Gender } from "./types";
+import { NewPatientEntry,Gender,Entry } from "./types";
 
 
 const isString = (text: unknown): text is string => {
@@ -40,12 +40,28 @@ const parseGender = (gender: unknown): Gender => {
 //};
 
 
+const parseEntries = (entries: unknown): Entry[] => {
+  if (!entries || !(entries instanceof Array)) {
+    return new Array<Entry>();
+  }
+
+  const parsed = entries.map((entry) => {
+    if (!("type" in entry)) {
+      throw new Error("Entry is missing type.");
+    }
+
+    return entry as Entry;
+  });
+
+  return parsed;
+};
+
 const toNewPatientEntry = (object: unknown): NewPatientEntry => {
   if ( !object || typeof object !== "object" ) {
     throw new Error("Incorrect or missing data");
   }
 
-  if ("name" in object && "dateOfBirth" in object && "ssn" in object && "gender" in object && "occupation" in object )  {
+  if ("name" in object && "dateOfBirth" in object && "ssn" in object && "gender" in object && "occupation" in object && "entries" in object )  {
     const newEntry: NewPatientEntry = {
       // eslint-disable-next-line indent
         name :parseString(object.name),
@@ -53,8 +69,7 @@ const toNewPatientEntry = (object: unknown): NewPatientEntry => {
       ssn:parseString(object.ssn),
       gender:parseGender(object.gender),
       occupation:parseString(object.occupation),
-      entries: [ ]
-      
+      entries: parseEntries(object.entries),
     };
     return newEntry;
   }

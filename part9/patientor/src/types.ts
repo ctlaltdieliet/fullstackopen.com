@@ -65,8 +65,8 @@ export interface Patient {
   ssn?: string;
   dateOfBirth?: string;
   entries: Entry[];
-  diagnosis:Diagnosis
+
 }
 
-export type PatientFormValues = Omit<Patient, "id" | "entries">;
+export type PatientFormValues = Omit<Patient, "id" | "diagnosis" | "entries">;
 export type NonSensitivePatient = Omit<Patient, 'ssn' | 'entries'>;
